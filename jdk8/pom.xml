@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.mycompany.aigw</groupId>
+	<artifactId>mcp-parent</artifactId>
+	<version>0.10.0-SNAPSHOT</version>
+
+	<packaging>pom</packaging>
+	<url>https://github.com/modelcontextprotocol/java-sdk</url>
+
+	<scm>
+		<url>https://github.com/modelcontextprotocol/java-sdk</url>
+		<connection>git://github.com/modelcontextprotocol/java-sdk.git</connection>
+		<developerConnection>git@github.com/modelcontextprotocol/java-sdk.git</developerConnection>
+	</scm>
+
+	<name>Model Context Protocol SDK for JDK 8</name>
+	<description>Java SDK for the Model Context Protocol compatible with JDK 8</description>
+
+
+	<organization>
+		<name>Anthropic</name>
+		<url>https://www.anthropic.com</url>
+	</organization>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Christian Tzolov</name>
+		</developer>
+		<developer>
+			<name>Dariusz Jędrzejczyk</name>
+		</developer>
+	</developers>
+
+	<issueManagement>
+		<system>Github Issues</system>
+		<url>https://github.com/modelcontextprotocol/java-sdk/issues</url>
+	</issueManagement>
+	<ciManagement>
+		<system>Github Actions</system>
+		<url>https://github.com/modelcontextprotocol/java-sdk/actions</url>
+	</ciManagement>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+
+		<assert4j.version>3.25.3</assert4j.version>
+		<junit.version>5.10.2</junit.version>
+		<mockito.version>5.2.0</mockito.version>
+		<testcontainers.version>1.17.6</testcontainers.version>
+		<byte-buddy.version>1.14.11</byte-buddy.version>		
+
+		<slf4j.version>1.7.36</slf4j.version>
+		<logback.version>1.2.13</logback.version>
+		<jackson.version>2.16.1</jackson.version>
+		<spring.version>5.3.34</spring.version>
+		
+		<!-- Reactor -->
+		<reactor.version>2024.0.5</reactor.version>
+		<reactor-netty.version>1.1.16</reactor-netty.version>
+
+		<!-- plugin versions -->
+		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+		<maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+		<maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version>
+		<maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
+		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+		<jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
+		<flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
+		<maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
+		<asciidoctor-maven-plugin.version>2.2.3</asciidoctor-maven-plugin.version>
+		<maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
+		<maven-dependency-plugin.version>3.5.0</maven-dependency-plugin.version>
+		<maven-site-plugin.version>4.0.0-M9</maven-site-plugin.version>
+		<maven-project-info-reports-plugin.version>3.4.5</maven-project-info-reports-plugin.version>
+		<maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
+		<spring-javaformat-maven-plugin.version>0.0.35</spring-javaformat-maven-plugin.version>
+		<org.maven.antora-version>1.0.0-alpha.4</org.maven.antora-version>
+		<io.spring.maven.antora-version>0.0.4</io.spring.maven.antora-version>
+		<asciidoctorj-pdf.version>1.6.2</asciidoctorj-pdf.version>
+		<junit-jupiter.version>5.10.2</junit-jupiter.version>
+		<tomcat.version>9.0.87</tomcat.version>
+		<javax.servlet.version>4.0.1</javax.servlet.version>
+		<awaitility.version>4.2.0</awaitility.version>
+		<bnd-maven-plugin.version>6.4.0</bnd-maven-plugin.version>
+		<json-unit-assertj.version>2.38.0</json-unit-assertj.version>
+	</properties>
+
+	<modules>
+		<module>mcp</module>
+		<module>mcp-bom</module>
+		<module>mcp-spring</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Reactor -->
+			<dependency>
+				<groupId>io.projectreactor</groupId>
+				<artifactId>reactor-bom</artifactId>
+				<version>${reactor.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.projectreactor</groupId>
+				<artifactId>reactor-test</artifactId>
+				<version>3.5.12</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.projectreactor.netty</groupId>
+				<artifactId>reactor-netty-http</artifactId>
+				<version>${reactor-netty.version}</version>
+			</dependency>
+
+			<!-- Logging -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- Testing -->
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-api</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-engine</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>${mockito.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.assertj</groupId>
+				<artifactId>assertj-core</artifactId>
+				<version>${assert4j.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+<!--			<plugin>-->
+<!--				<groupId>io.spring.javaformat</groupId>-->
+<!--				<artifactId>spring-javaformat-maven-plugin</artifactId>-->
+<!--				<version>${spring-javaformat-maven-plugin.version}</version>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<phase>validate</phase>-->
+<!--						<inherited>true</inherited>-->
+<!--						<goals>-->
+<!--							<goal>validate</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>${maven-site-plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven-source-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>org.apache.maven.plugins</groupId>-->
+<!--				<artifactId>maven-javadoc-plugin</artifactId>-->
+<!--				<version>${maven-javadoc-plugin.version}</version>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>attach-javadocs</id>-->
+<!--						<goals>-->
+<!--							<goal>jar</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven-jar-plugin.version}</version>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Implementation-Title>${project.artifactId}</Implementation-Title>
+							<Implementation-Version>${project.version}</Implementation-Version>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+				<version>${flatten-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>flatten</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>flatten</goal>
+						</goals>
+						<configuration>
+							<updatePomFile>true</updatePomFile>
+							<flattenMode>ossrh</flattenMode>
+							<pomElements>
+								<distributionManagement>remove</distributionManagement>
+								<dependencyManagement>remove</dependencyManagement>
+								<repositories>remove</repositories>
+								<scm>keep</scm>
+								<url>keep</url>
+								<organization>resolve</organization>
+							</pomElements>
+						</configuration>
+					</execution>
+					<execution>
+						<id>clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>${maven-deploy-plugin.version}</version>
+			</plugin>
+		</plugins>
+	</build>
+</project> 
